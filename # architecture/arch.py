@@ -38,3 +38,10 @@ class ARCH:
         blla = BlendedLowLevelAgent(ll_as)
         self.blended_agents.append(blla)
         return blla
+
+    def process_user_inquiry(self, inquiry):
+        subtopics = self.upstream_agent.analyze_topic(inquiry)
+        self.upstream_agent.delegate_tasks(subtopics)
+        results = self.upstream_agent.compile_results()
+        return results
+
