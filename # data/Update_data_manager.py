@@ -16,3 +16,19 @@ class DataManager:
         print("Consolidating data...")
         self.collected_data.extend(new_data)
         return self.collected_data
+
+# data/data_manager.py
+
+import json
+
+class DataManager:
+    @staticmethod
+    def save_data(data, filename='data.json'):
+        with open(filename, 'w') as file:
+            json.dump(data, file)
+
+    @staticmethod
+    def load_data(filename='data.json'):
+        with open(filename, 'r') as file:
+            return json.load(file)
+
