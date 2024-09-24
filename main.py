@@ -13,19 +13,19 @@ def main():
     
     logger.log_info("Starting the web crawler...")
 
+    # Get user inquiry
+    user_inquiry = input("Please enter a research topic (e.g., 'web development using Python'): ")
+
     # Create an instance of ARCH
     arch = ARCH()
 
-    # Example user inquiry
-    user_inquiry = "web development using Python"
-    
     # Process the user inquiry and gather results
     results = arch.process_user_inquiry(user_inquiry)
 
     # Log and save results
     logger.log_info("Crawling completed.")
     logger.log_info(f"Results: {results}")
-    data_manager.save_data(results)
+    data_manager.save_data()
 
 if __name__ == "__main__":
     main()
