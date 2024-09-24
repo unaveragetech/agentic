@@ -1,23 +1,24 @@
 # agents/upstream_agent.py
 
+from agents.low_level_agent import LowLevelAgent
+from architecture.arch import ARCH
+
 class UpstreamAgent:
     def __init__(self):
         self.tasks = []
 
-    def analyze_topic(self, user_inquiry):
-        # Analyze the user's inquiry and identify key themes and subtopics
-        # (Placeholder for analysis logic)
-        print(f"Analyzing topic: {user_inquiry}")
-        # Example: Returning a mock list of subtopics for now
-        return ["subtopic1", "subtopic2", "subtopic3"]
+    def analyze_topic(self, topic):
+        # Simple mock analysis: split topic into subtopics
+        subtopics = topic.split(" using ")  # Example: ["web development", "Python"]
+        return subtopics
 
     def delegate_tasks(self, subtopics):
-        # Create and delegate high-level tasks to Low-Level Agents (LLAs)
-        print(f"Delegating tasks for subtopics: {subtopics}")
-        self.tasks = subtopics  # Placeholder for task delegation logic
+        self.tasks = []
+        for subtopic in subtopics:
+            lla = LowLevelAgent(subtopic)
+            self.tasks.append(lla)
 
-    def synthesize_information(self):
-        # Compile and synthesize the information collected by LLAs
-        print("Synthesizing information...")
-        # (Placeholder for synthesis logic)
-        return {"summary": "Compiled research findings"}
+    def compile_results(self):
+        # Compile results from all tasks
+        results = [task.conduct_research() for task in self.tasks]
+        return results
