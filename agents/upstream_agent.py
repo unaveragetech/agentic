@@ -6,9 +6,12 @@ from architecture.arch import ARCH
 class UpstreamAgent:
     def __init__(self):
         self.tasks = []
+        self.status = {}  # Track status of each LLA
 
     def analyze_topic(self, topic):
-        # Simple mock analysis: split topic into subtopics
+        if not topic:
+            raise ValueError("Topic cannot be empty.")
+        print(f"Analyzing topic: {topic}")
         subtopics = topic.split(" using ")  # Example: ["web development", "Python"]
         return subtopics
 
@@ -17,8 +20,15 @@ class UpstreamAgent:
         for subtopic in subtopics:
             lla = LowLevelAgent(subtopic)
             self.tasks.append(lla)
+            self.status[subtopic] = "Pending"  # Initial status
 
     def compile_results(self):
-        # Compile results from all tasks
-        results = [task.conduct_research() for task in self.tasks]
+        results = {}
+        for task in self.tasks:
+            result = task.conduct_research()
+            results[task.subtopic] = result
+            self.status[task.subtopic] = "Completed" if result else "Failed"
         return results
+
+    def get_status(self):
+        return self.status
