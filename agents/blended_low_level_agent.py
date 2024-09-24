@@ -1,14 +1,13 @@
 # agents/blended_low_level_agent.py
 
 class BlendedLowLevelAgent:
-    def __init__(self, ll_as):
-        self.ll_as = ll_as  # List of Low-Level Agents
+    def __init__(self, agents):
+        self.agents = agents
 
     def consolidate_information(self):
-        # Aggregate findings from constituent LLAs
-        print("Consolidating information from LLAs...")
         consolidated_data = {}
-        for lla in self.ll_as:
-            data = lla.conduct_research()
-            consolidated_data[lla.subtopic] = data
+        for agent in self.agents:
+            data = agent.conduct_research()
+            if data:
+                consolidated_data[agent.subtopic] = data
         return consolidated_data
