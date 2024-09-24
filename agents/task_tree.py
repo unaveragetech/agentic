@@ -2,13 +2,13 @@
 
 class TaskTree:
     def __init__(self):
-        self.tree = {}
+        self.tasks = []
 
-    def add_task(self, subtopic, task_details):
-        # Add a new task to the Task Tree
-        self.tree[subtopic] = task_details
-        print(f"Added task for {subtopic}: {task_details}")
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def remove_task(self, task):
+        self.tasks.remove(task)
 
     def get_tasks(self):
-        # Retrieve all tasks in the Task Tree
-        return self.tree
+        return self.tasks
