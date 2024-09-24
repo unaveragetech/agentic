@@ -11,3 +11,6 @@ class BlendedLowLevelAgent:
             if data:
                 consolidated_data[agent.subtopic] = data
         return consolidated_data
+
+    def get_agent_status(self):
+        return {agent.subtopic: agent.status for agent in self.agents}
